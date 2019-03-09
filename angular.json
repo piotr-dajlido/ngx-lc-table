@@ -121,6 +121,165 @@
           }
         }
       }
+    },
+    "ngx-lc-table": {
+      "root": "projects/ngx-lc-table",
+      "sourceRoot": "projects/ngx-lc-table/src",
+      "projectType": "library",
+      "prefix": "ngx-lc-table",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-lc-table/tsconfig.lib.json",
+            "project": "projects/ngx-lc-table/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/ngx-lc-table/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-lc-table/src/test.ts",
+            "tsConfig": "projects/ngx-lc-table/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-lc-table/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-lc-table/tsconfig.lib.json",
+              "projects/ngx-lc-table/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ngx-lc-table-test": {
+      "root": "projects/ngx-lc-table-test/",
+      "sourceRoot": "projects/ngx-lc-table-test/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ngx-lc-table-test",
+            "index": "projects/ngx-lc-table-test/src/index.html",
+            "main": "projects/ngx-lc-table-test/src/main.ts",
+            "polyfills": "projects/ngx-lc-table-test/src/polyfills.ts",
+            "tsConfig": "projects/ngx-lc-table-test/tsconfig.app.json",
+            "assets": [
+              "projects/ngx-lc-table-test/src/favicon.ico",
+              "projects/ngx-lc-table-test/src/assets"
+            ],
+            "styles": [
+              "projects/ngx-lc-table-test/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ngx-lc-table-test/src/environments/environment.ts",
+                  "with": "projects/ngx-lc-table-test/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ngx-lc-table-test:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ngx-lc-table-test:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ngx-lc-table-test:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-lc-table-test/src/test.ts",
+            "polyfills": "projects/ngx-lc-table-test/src/polyfills.ts",
+            "tsConfig": "projects/ngx-lc-table-test/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-lc-table-test/karma.conf.js",
+            "styles": [
+              "projects/ngx-lc-table-test/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/ngx-lc-table-test/src/favicon.ico",
+              "projects/ngx-lc-table-test/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-lc-table-test/tsconfig.app.json",
+              "projects/ngx-lc-table-test/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ngx-lc-table-test-e2e": {
+      "root": "projects/ngx-lc-table-test-e2e/",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ngx-lc-table-test-e2e/protractor.conf.js",
+            "devServerTarget": "ngx-lc-table-test:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ngx-lc-table-test:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/ngx-lc-table-test-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-table-lib"
