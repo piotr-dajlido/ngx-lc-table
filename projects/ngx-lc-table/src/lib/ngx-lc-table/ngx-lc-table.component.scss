@@ -1,0 +1,27 @@
+.ngx-lc-table-headers {
+  width: 100%;
+  display: flex;
+}
+.ngx-lc-table-rows{
+  width: 100%;
+  display: flex;
+flex-direction: column;
+  .ngx-lc-table-row{
+    width: 100%;
+    display: flex;
+  }
+}
+.ngx-lc-table-columns {
+  width: 100%;
+  display: flex;
+  flex: 1;
+  .ngx-lc-table-column{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    .ngx-lc-table-cell {
+      display: flex;
+      flex: 1;
+    }
+  }
+}

@@ -282,5 +282,10 @@
       }
     }
   },
-  "defaultProject": "ngx-table-lib"
+  "defaultProject": "ngx-table-lib",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

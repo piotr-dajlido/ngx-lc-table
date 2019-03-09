@@ -1,22 +1,20 @@
-import {Component, ContentChildren, Input, OnInit, QueryList} from '@angular/core';
+import {ContentChildren, Directive, Input, QueryList, TemplateRef, ViewChildren} from '@angular/core';
 import {NgxLcTableHeaderDirective} from '../ngx-lc-table-header/ngx-lc-table-header.directive';
 import {NgxLcTableRowDirective} from '../ngx-lc-table-row/ngx-lc-table-row.directive';
 
-@Component({
-  selector: 'ngx-lc-table-column',
-  templateUrl: './ngx-lc-table-column.component.html',
-  styleUrls: ['./ngx-lc-table-column.component.css']
+@Directive({
+  selector: '[ngxLcTableColumn]'
 })
-export class NgxLcTableColumnComponent implements OnInit {
+export class NgxLcTableColumnDirective {
   @Input() prop: string | string[];
 
   @ContentChildren(NgxLcTableHeaderDirective) headers: QueryList<NgxLcTableHeaderDirective>;
   @ContentChildren(NgxLcTableRowDirective) rows: QueryList<NgxLcTableRowDirective>;
 
-  constructor() {
+  constructor(public templateRef: TemplateRef<any>) {
+    console.log(this.templateRef);
+    setTimeout(() => {
+      console.log(this);
+    }, 2000);
   }
-
-  ngOnInit() {
-  }
-
 }

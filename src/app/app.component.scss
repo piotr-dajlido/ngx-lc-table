@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  .menu {
+    height: 50px;
+    display: flex;
+    flex: 1;
+    width: 100%;
+    background-color: antiquewhite;
+    button {
+      cursor: pointer;
+      margin: 5px;
+      border-radius: 10px;
+      outline: none;
+      &:hover {
+        background-color: cornflowerblue;
+      }
+    }
+  }
+}
