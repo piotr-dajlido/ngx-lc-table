@@ -1,17 +1,38 @@
-.ngx-lc-table-columns {
-  width: 100%;
+.ngx-lc-table-container {
   display: flex;
+  width: 100%;
   flex: 1;
-  .ngx-lc-table-column{
+  flex-direction: column;
+  .ngx-lc-table-header-container {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    background-color: cornflowerblue;
+
+  }
+
+  .ngx-lc-table-row-container {
     display: flex;
     flex-direction: column;
-    flex: 1;
-    .ngx-lc-table-header{
-      background-color: cornflowerblue;
-    }
-    .ngx-lc-table-cell {
+    width: 100%;
+    .ngx-lc-table-row {
       display: flex;
-      flex: 1;
+      width: 100%;
+      &:hover {
+        background-color: antiquewhite;
+      }
     }
+  }
+}
+
+.ngx-lc-table-header, .ngx-lc-table-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:first-child{
+    justify-content: flex-start;
+  }
+  &:last-child{
+    justify-content: flex-end;
   }
 }

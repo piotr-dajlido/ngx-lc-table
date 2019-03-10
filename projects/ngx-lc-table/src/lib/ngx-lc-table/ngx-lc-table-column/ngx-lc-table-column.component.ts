@@ -10,7 +10,7 @@ import {NgxLcTableRowDirective} from '../ngx-lc-table-row/ngx-lc-table-row.direc
 export class NgxLcTableColumnComponent implements OnInit {
 
   @Input() prop: string | string[];
-
+  @Input() width: string = '100%';
   @ContentChildren(NgxLcTableHeaderDirective) headers: QueryList<NgxLcTableHeaderDirective>;
   @ContentChildren(NgxLcTableRowDirective) rows: QueryList<NgxLcTableRowDirective>;
 

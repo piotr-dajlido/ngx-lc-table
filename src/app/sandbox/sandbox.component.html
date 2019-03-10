@@ -1,7 +1,7 @@
 <ngx-lc-table [data]="tableData">
-  <ngx-lc-table-column [prop]="'name'">
+  <ngx-lc-table-column [prop]="'name'" width="200px">
     <ng-template ngxLcTableHeader>Name</ng-template>
-    <ng-template ngxLcTableRow let-value>{{value}}</ng-template>
+    <ng-template ngxLcTableRow let-value heigth="100px">{{value}}</ng-template>
   </ngx-lc-table-column>
   <ngx-lc-table-column [prop]="'lastName'">
     <ng-template ngxLcTableHeader>Last Name</ng-template>

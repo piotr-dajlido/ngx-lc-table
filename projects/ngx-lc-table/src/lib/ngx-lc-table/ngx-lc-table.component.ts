@@ -1,7 +1,6 @@
-import {AfterViewInit, Component, ContentChildren, Input, OnDestroy, OnInit, QueryList, TemplateRef} from '@angular/core';
+import {AfterViewInit, Component, ContentChildren, HostBinding, Input, OnDestroy, OnInit, QueryList, TemplateRef} from '@angular/core';
 import {NgxLcTableFooterDirective} from './ngx-lc-table-footer/ngx-lc-table-footer.directive';
 import {NgxLcTableColumnComponent} from './ngx-lc-table-column/ngx-lc-table-column.component';
-import {NgxLcTableHeaderDirective} from './ngx-lc-table-header/ngx-lc-table-header.directive';
 import {NgxLcTableDataService} from '../ngx-lc-table-data.service';
 import {Subscription} from 'rxjs';
 
@@ -10,27 +9,33 @@ import {Subscription} from 'rxjs';
   templateUrl: './ngx-lc-table.component.html',
   styleUrls: ['./ngx-lc-table.component.scss']
 })
-export class NgxLcTableComponent implements AfterViewInit, OnInit, OnDestroy {
+export class NgxLcTableComponent implements AfterViewInit {
 
+  @HostBinding('class.ngx-lc-table')
+  ngxLcTableClass = true;
   @Input() data: any[];
   @ContentChildren(NgxLcTableColumnComponent) columnsDefinitions: QueryList<NgxLcTableColumnComponent>;
   @ContentChildren(NgxLcTableFooterDirective) footers: QueryList<NgxLcTableFooterDirective>;
-  headers: NgxLcTableHeaderDirective[] = [];
-  columns: NgxLcTableColumn[] = [];
-  ngxLcTableDataServiceSub: Subscription;
+  headers: NgxLcTableHeader[] = [];
+  rows: NgxLcTableRow[] = [];
 
-  constructor(private ngxLcTableDataService: NgxLcTableDataService) {
+  constructor() {
   }
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.columns = this.columnsDefinitions.map(column => {
-        return {
-          cellValues: this.data.map(row => this.resolveRequestedProperties(column.prop, row)),
-          cellTemplateRef: column.rows.first.templateRef,
-          headerTemplateRef: column.headers.first.templateRef
-        };
-      });
+      this.headers = this.columnsDefinitions.map(column => ({width: column.width, templateRef: column.headers.first.templateRef}));
+      this.rows = this.data
+      .map(dataItem =>
+        ({
+          cells: this.columnsDefinitions
+          .map(column =>
+            ({
+              value: this.resolveRequestedProperties(column.prop, dataItem),
+              template: column.rows.first.templateRef,
+              width: column.width
+            }))
+        }));
     });
   }
 
@@ -67,17 +72,20 @@ export class NgxLcTableComponent implements AfterViewInit, OnInit, OnDestroy {
     return obj;
   }
 
-  ngOnInit() {
-  }
-
-  ngOnDestroy(): void {
-    this.ngxLcTableDataServiceSub.unsubscribe();
-  }
-
 }
 
-export class NgxLcTableColumn {
-  cellValues: any[];
-  cellTemplateRef: TemplateRef<any>;
-  headerTemplateRef: TemplateRef<any>;
+export class NgxLcTableRow {
+  cells: NgxLcTableCell[];
+}
+
+export class NgxLcTableCell {
+  value: any;
+  width: string;
+  template: TemplateRef<any>;
+}
+
+
+export class NgxLcTableHeader {
+  width: string;
+  templateRef: TemplateRef<any>;
 }
