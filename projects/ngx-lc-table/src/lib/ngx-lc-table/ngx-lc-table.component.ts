@@ -13,10 +13,10 @@ import {Subscription} from 'rxjs';
 export class NgxLcTableComponent implements AfterViewInit, OnInit, OnDestroy {
 
   @Input() data: any[];
-  @ContentChildren(NgxLcTableColumnComponent) columns: QueryList<NgxLcTableColumnComponent>;
+  @ContentChildren(NgxLcTableColumnComponent) columnsDefinitions: QueryList<NgxLcTableColumnComponent>;
   @ContentChildren(NgxLcTableFooterDirective) footers: QueryList<NgxLcTableFooterDirective>;
   headers: NgxLcTableHeaderDirective[] = [];
-  rows: NgxLcTableCell[] = [];
+  columns: NgxLcTableColumn[] = [];
   ngxLcTableDataServiceSub: Subscription;
 
   constructor(private ngxLcTableDataService: NgxLcTableDataService) {
@@ -24,9 +24,12 @@ export class NgxLcTableComponent implements AfterViewInit, OnInit, OnDestroy {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.headers = this.columns.map(column => column.headers.first);
-      this.rows = this.columns.map(column => {
-        return {prop: column.prop, templateRef: column.rows.first.templateRef};
+      this.columns = this.columnsDefinitions.map(column => {
+        return {
+          cellValues: this.data.map(row => this.resolveRequestedProperties(column.prop, row)),
+          cellTemplateRef: column.rows.first.templateRef,
+          headerTemplateRef: column.headers.first.templateRef
+        };
       });
     });
   }
@@ -73,7 +76,8 @@ export class NgxLcTableComponent implements AfterViewInit, OnInit, OnDestroy {
 
 }
 
-export class NgxLcTableCell {
-  prop: string | string[];
-  templateRef: TemplateRef<any>;
+export class NgxLcTableColumn {
+  cellValues: any[];
+  cellTemplateRef: TemplateRef<any>;
+  headerTemplateRef: TemplateRef<any>;
 }

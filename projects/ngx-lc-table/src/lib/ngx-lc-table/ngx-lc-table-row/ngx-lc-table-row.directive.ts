@@ -4,6 +4,8 @@ import {Directive, TemplateRef} from '@angular/core';
   selector: '[ngxLcTableRow]'
 })
 export class NgxLcTableRowDirective {
+
   constructor(public templateRef: TemplateRef<any>) {
   }
+
 }

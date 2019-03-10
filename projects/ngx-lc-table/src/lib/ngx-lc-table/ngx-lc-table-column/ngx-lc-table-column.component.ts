@@ -8,6 +8,7 @@ import {NgxLcTableRowDirective} from '../ngx-lc-table-row/ngx-lc-table-row.direc
   styleUrls: ['./ngx-lc-table-column.component.css']
 })
 export class NgxLcTableColumnComponent implements OnInit {
+
   @Input() prop: string | string[];
 
   @ContentChildren(NgxLcTableHeaderDirective) headers: QueryList<NgxLcTableHeaderDirective>;

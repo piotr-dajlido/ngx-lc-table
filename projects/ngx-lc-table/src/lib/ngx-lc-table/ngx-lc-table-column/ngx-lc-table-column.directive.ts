@@ -1,4 +1,4 @@
-import {ContentChildren, Directive, Input, QueryList, TemplateRef, ViewChildren} from '@angular/core';
+import {ContentChildren, Directive, Input, QueryList, TemplateRef} from '@angular/core';
 import {NgxLcTableHeaderDirective} from '../ngx-lc-table-header/ngx-lc-table-header.directive';
 import {NgxLcTableRowDirective} from '../ngx-lc-table-row/ngx-lc-table-row.directive';
 
@@ -6,6 +6,7 @@ import {NgxLcTableRowDirective} from '../ngx-lc-table-row/ngx-lc-table-row.direc
   selector: '[ngxLcTableColumn]'
 })
 export class NgxLcTableColumnDirective {
+
   @Input() prop: string | string[];
 
   @ContentChildren(NgxLcTableHeaderDirective) headers: QueryList<NgxLcTableHeaderDirective>;
@@ -17,4 +18,5 @@ export class NgxLcTableColumnDirective {
       console.log(this);
     }, 2000);
   }
+
 }
