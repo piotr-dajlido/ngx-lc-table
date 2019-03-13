@@ -1,8 +1,6 @@
-import {AfterViewInit, Component, ContentChildren, HostBinding, Input, OnDestroy, OnInit, QueryList, TemplateRef} from '@angular/core';
+import {AfterViewInit, Component, ContentChildren, HostBinding, Input, QueryList, TemplateRef, ViewChild} from '@angular/core';
 import {NgxLcTableFooterDirective} from './ngx-lc-table-footer/ngx-lc-table-footer.directive';
 import {NgxLcTableColumnComponent} from './ngx-lc-table-column/ngx-lc-table-column.component';
-import {NgxLcTableDataService} from '../ngx-lc-table-data.service';
-import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'ngx-lc-table',
@@ -15,9 +13,11 @@ export class NgxLcTableComponent implements AfterViewInit {
   ngxLcTableClass = true;
   @Input() data: any[];
   @ContentChildren(NgxLcTableColumnComponent) columnsDefinitions: QueryList<NgxLcTableColumnComponent>;
-  @ContentChildren(NgxLcTableFooterDirective) footers: QueryList<NgxLcTableFooterDirective>;
+  @ContentChildren(NgxLcTableFooterDirective) footerDefinition: QueryList<NgxLcTableFooterDirective>;
+  @ViewChild('emptyCell') emptyCellDefinition: TemplateRef<any>;
   headers: NgxLcTableHeader[] = [];
   rows: NgxLcTableRow[] = [];
+  footer: NgxLcTableFooter = new NgxLcTableFooter();
 
   constructor() {
   }
@@ -25,16 +25,31 @@ export class NgxLcTableComponent implements AfterViewInit {
   ngAfterViewInit() {
     setTimeout(() => {
       this.headers = this.columnsDefinitions.map(column => ({width: column.width, templateRef: column.headers.first.templateRef}));
+      this.footer = {
+        cells:
+          this.columnsDefinitions
+          .map(column =>
+            ({
+                width: column.width,
+                templateRef: column.footer.first ? column.footer.first.templateRef : this.emptyCellDefinition,
+                value: []
+              }
+            )
+          )
+      };
       this.rows = this.data
       .map(dataItem =>
         ({
           cells: this.columnsDefinitions
-          .map(column =>
-            ({
-              value: this.resolveRequestedProperties(column.prop, dataItem),
-              template: column.rows.first.templateRef,
+          .map((column, i) => {
+            const value = this.resolveRequestedProperties(column.prop, dataItem);
+            (this.footer.cells[i].value as Array<any>).push(value);
+            return {
+              value: value,
+              templateRef: column.rows.first.templateRef,
               width: column.width
-            }))
+            };
+          })
         }));
     });
   }
@@ -81,9 +96,12 @@ export class NgxLcTableRow {
 export class NgxLcTableCell {
   value: any;
   width: string;
-  template: TemplateRef<any>;
+  templateRef: TemplateRef<any>;
 }
 
+export class NgxLcTableFooter {
+  cells: NgxLcTableCell[] = [];
+}
 
 export class NgxLcTableHeader {
   width: string;

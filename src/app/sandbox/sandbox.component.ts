@@ -3,7 +3,7 @@ import {Component, OnInit} from '@angular/core';
 @Component({
   selector: 'app-sandbox',
   templateUrl: './sandbox.component.html',
-  styleUrls: ['./sandbox.component.css']
+  styleUrls: ['./sandbox.component.scss']
 })
 export class SandboxComponent implements OnInit {
 
@@ -60,6 +60,10 @@ export class SandboxComponent implements OnInit {
   }];
 
   constructor() {
+  }
+
+  acc(arr: any[]) {
+    return arr.reduce((acc, v) => acc + v.age, 0);
   }
 
   ngOnInit() {

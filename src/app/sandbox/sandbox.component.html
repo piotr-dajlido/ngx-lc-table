@@ -1,7 +1,7 @@
 <ngx-lc-table [data]="tableData">
-  <ngx-lc-table-column [prop]="'name'" width="200px">
+  <ngx-lc-table-column [prop]="'name'" width="250px">
     <ng-template ngxLcTableHeader>Name</ng-template>
-    <ng-template ngxLcTableRow let-value heigth="100px">{{value}}</ng-template>
+    <ng-template ngxLcTableRow let-value>{{value}}</ng-template>
   </ngx-lc-table-column>
   <ngx-lc-table-column [prop]="'lastName'">
     <ng-template ngxLcTableHeader>Last Name</ng-template>
@@ -10,6 +10,7 @@
   <ngx-lc-table-column [prop]="['age', 'sex']">
     <ng-template ngxLcTableHeader>Age</ng-template>
     <ng-template ngxLcTableRow let-value>{{value.age}}-{{value.sex}}</ng-template>
+    <ng-template ngxLcTableFooter let-value>{{acc(value)}}</ng-template>
   </ngx-lc-table-column>
   <ngx-lc-table-column [prop]="'misc.phone'">
     <ng-template ngxLcTableHeader>
@@ -21,6 +22,10 @@
     <ng-template ngxLcTableHeader>
       <div (click)="click()">Misc</div>
     </ng-template>
-    <ng-template ngxLcTableRow let-value>{{value.misc.bloodType}} | {{value.misc.eyeColor}}</ng-template>
+    <ng-template ngxLcTableRow let-value>{{value.misc.bloodType}} | {{value.misc.eyeColor}}
+    </ng-template>
   </ngx-lc-table-column>
+  <ng-template ngxLcTableFooter>
+    Hello
+  </ng-template>
 </ngx-lc-table>

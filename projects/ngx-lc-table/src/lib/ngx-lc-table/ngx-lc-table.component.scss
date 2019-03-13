@@ -1,34 +1,30 @@
 .ngx-lc-table-container {
   display: flex;
   width: 100%;
+  max-width: 100%;
   flex: 1;
   flex-direction: column;
   .ngx-lc-table-header-container {
     display: flex;
     width: 100%;
-    height: 50px;
-    background-color: cornflowerblue;
-
   }
 
   .ngx-lc-table-row-container {
     display: flex;
     flex-direction: column;
     width: 100%;
-    .ngx-lc-table-row {
+    .ngx-lc-table-row, .ngx-lc-table-footer {
       display: flex;
       width: 100%;
-      &:hover {
-        background-color: antiquewhite;
-      }
     }
   }
 }
 
-.ngx-lc-table-header, .ngx-lc-table-cell {
+.ngx-lc-table-header, .ngx-lc-table-cell, .ngx-lc-table-footer {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 1 1 100%;
   &:first-child{
     justify-content: flex-start;
   }

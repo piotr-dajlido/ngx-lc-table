@@ -1,19 +1,35 @@
 <div class="ngx-lc-table-container">
   <div class="ngx-lc-table-header-container">
-    <div class="ngx-lc-table-header" [style.flex]="'1 1 '+ header.width"
-         *ngFor="let header of headers">
+    <div [class]="'ngx-lc-table-cell column-' + i"
+         [style.minWidth]="header.width"
+         *ngFor="let header of headers; let i = index">
       <ng-template [ngTemplateOutlet]="header.templateRef"
                    [ngTemplateOutletContext]="{$implicit: {}}"></ng-template>
     </div>
   </div>
   <div class="ngx-lc-table-row-container">
     <div class="ngx-lc-table-row" *ngFor="let row of rows">
-      <div class="ngx-lc-table-cell" [style.flex]="'1 1 '+ cell.width"
-           *ngFor="let cell of row.cells">
-        <ng-template [ngTemplateOutlet]="cell.template"
+      <div [class]="'ngx-lc-table-cell column-' + i"
+           [style.minWidth]="cell.width"
+           *ngFor="let cell of row.cells; let i = index">
+        <ng-template [ngTemplateOutlet]="cell.templateRef"
                      [ngTemplateOutletContext]="{$implicit: cell.value}"></ng-template>
       </div>
     </div>
+    <div class="ngx-lc-table-footer">
+      <div [class]="'ngx-lc-table-cell column-' + i"
+           *ngFor="let footerCell of footer.cells; let i = index"
+           [style.minWidth]="footerCell.width">
+        <ng-template [ngTemplateOutlet]="footerCell.templateRef"
+                     [ngTemplateOutletContext]="{$implicit: footerCell.value}"></ng-template>
+      </div>
+    </div>
+  </div>
+  <div class="ngx-lc-table-footer-container">
+    <div class="ngx-lc-table-footer">
+      <ng-template [ngTemplateOutlet]="footerDefinition.first.templateRef"
+                   [ngTemplateOutletContext]="{$implicit: data}"></ng-template>
+    </div>
   </div>
 </div>
-
+<ng-template #emptyCell></ng-template>

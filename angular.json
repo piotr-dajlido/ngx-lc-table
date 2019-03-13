@@ -23,7 +23,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -72,7 +72,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": [],
             "assets": [
@@ -182,7 +182,7 @@
               "projects/ngx-lc-table-test/src/assets"
             ],
             "styles": [
-              "projects/ngx-lc-table-test/src/styles.css"
+              "projects/ngx-lc-table-test/src/styles.scss"
             ],
             "scripts": []
           },
@@ -231,7 +231,7 @@
             "tsConfig": "projects/ngx-lc-table-test/tsconfig.spec.json",
             "karmaConfig": "projects/ngx-lc-table-test/karma.conf.js",
             "styles": [
-              "projects/ngx-lc-table-test/src/styles.css"
+              "projects/ngx-lc-table-test/src/styles.scss"
             ],
             "scripts": [],
             "assets": [

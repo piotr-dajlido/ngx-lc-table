@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+html,body{
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+.ngx-lc-table {
+  .ngx-lc-table-container {
+    .ngx-lc-table-header-container {
+      background-color: cornflowerblue;
+    }
+    .ngx-lc-table-row-container {
+      .ngx-lc-table-row {
+        &:hover {
+          background-color: antiquewhite;
+        }
+      }
+      .column-2{
+        background-color: rebeccapurple;
+      }
+    }
+  }
+}

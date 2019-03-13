@@ -1,6 +1,7 @@
 import {Component, ContentChildren, Input, OnInit, QueryList} from '@angular/core';
 import {NgxLcTableHeaderDirective} from '../ngx-lc-table-header/ngx-lc-table-header.directive';
 import {NgxLcTableRowDirective} from '../ngx-lc-table-row/ngx-lc-table-row.directive';
+import {NgxLcTableFooterDirective} from '../ngx-lc-table-footer/ngx-lc-table-footer.directive';
 
 @Component({
   selector: 'ngx-lc-table-column',
@@ -10,9 +11,10 @@ import {NgxLcTableRowDirective} from '../ngx-lc-table-row/ngx-lc-table-row.direc
 export class NgxLcTableColumnComponent implements OnInit {
 
   @Input() prop: string | string[];
-  @Input() width: string = '100%';
+  @Input() width: string = '';
   @ContentChildren(NgxLcTableHeaderDirective) headers: QueryList<NgxLcTableHeaderDirective>;
   @ContentChildren(NgxLcTableRowDirective) rows: QueryList<NgxLcTableRowDirective>;
+  @ContentChildren(NgxLcTableFooterDirective) footer: QueryList<NgxLcTableFooterDirective>;
 
   constructor() {
   }
