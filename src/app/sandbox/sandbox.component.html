@@ -1,9 +1,9 @@
 <ngx-lc-table [data]="tableData">
-  <ngx-lc-table-column [prop]="'name'" width="250px">
+  <ngx-lc-table-column [prop]="'name'" >
     <ng-template ngxLcTableHeader>Name</ng-template>
     <ng-template ngxLcTableRow let-value>{{value}}</ng-template>
   </ngx-lc-table-column>
-  <ngx-lc-table-column [prop]="'lastName'">
+  <ngx-lc-table-column [prop]="'lastName'" width="250px">
     <ng-template ngxLcTableHeader>Last Name</ng-template>
     <ng-template ngxLcTableRow let-value>{{value}}</ng-template>
   </ngx-lc-table-column>
@@ -16,7 +16,7 @@
     <ng-template ngxLcTableHeader>
       <div (click)="click()">Phone</div>
     </ng-template>
-    <ng-template ngxLcTableRow let-value>{{value}}</ng-template>
+    <!--<ng-template ngxLcTableRow let-value>{{value}}</ng-template>-->
   </ngx-lc-table-column>
   <ngx-lc-table-column [prop]="['misc.bloodType','misc.eyeColor']">
     <ng-template ngxLcTableHeader>

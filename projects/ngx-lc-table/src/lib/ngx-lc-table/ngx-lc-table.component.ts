@@ -24,7 +24,11 @@ export class NgxLcTableComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.headers = this.columnsDefinitions.map(column => ({width: column.width, templateRef: column.headers.first.templateRef}));
+      this.headers = this.columnsDefinitions.map(column =>
+        ({
+          width: column.width,
+          templateRef: column.headers.first ? column.headers.first.templateRef : this.emptyCellDefinition,
+        }));
       this.footer = {
         cells:
           this.columnsDefinitions
@@ -46,7 +50,7 @@ export class NgxLcTableComponent implements AfterViewInit {
             (this.footer.cells[i].value as Array<any>).push(value);
             return {
               value: value,
-              templateRef: column.rows.first.templateRef,
+              templateRef: column.rows.first ? column.rows.first.templateRef : this.emptyCellDefinition,
               width: column.width
             };
           })
