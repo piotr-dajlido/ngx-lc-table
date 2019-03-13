@@ -1,9 +1,9 @@
 import {Directive, TemplateRef} from '@angular/core';
 
 @Directive({
-  selector: '[ngxLcTableRow]'
+  selector: '[ngxLcTableRowExpanded]'
 })
-export class NgxLcTableRowDirective {
+export class NgxLcTableRowExpandedDirective {
 
   constructor(public templateRef: TemplateRef<any>) {
   }

@@ -5,6 +5,7 @@ import {NgxLcTableFooterDirective} from './ngx-lc-table/ngx-lc-table-footer/ngx-
 import {NgxLcTableHeaderDirective} from './ngx-lc-table/ngx-lc-table-header/ngx-lc-table-header.directive';
 import {NgxLcTableRowDirective} from './ngx-lc-table/ngx-lc-table-row/ngx-lc-table-row.directive';
 import {CommonModule} from '@angular/common';
+import {NgxLcTableRowExpandedDirective} from './ngx-lc-table/ngx-lc-table-row/ngx-lc-table-row-expanded.directive';
 
 @NgModule({
   imports: [CommonModule],
@@ -14,12 +15,14 @@ import {CommonModule} from '@angular/common';
     NgxLcTableFooterDirective,
     NgxLcTableHeaderDirective,
     NgxLcTableRowDirective,
+    NgxLcTableRowExpandedDirective,
   ],
   exports: [NgxLcTableComponent,
     NgxLcTableColumnComponent,
     NgxLcTableFooterDirective,
     NgxLcTableHeaderDirective,
-    NgxLcTableRowDirective],
+    NgxLcTableRowDirective,
+    NgxLcTableRowExpandedDirective],
   schemas: [NO_ERRORS_SCHEMA]
 })
 export class NgxLcTableModule {

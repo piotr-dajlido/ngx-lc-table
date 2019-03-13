@@ -53,7 +53,18 @@ export class NgxLcTableComponent implements AfterViewInit {
               templateRef: column.rows.first ? column.rows.first.templateRef : this.emptyCellDefinition,
               width: column.width
             };
-          })
+          }),
+          expandedRows: this.columnsDefinitions
+          .filter(column => column.expandedRows.length !== 0)
+          .map(column => {
+            const value = this.resolveRequestedProperties(column.prop, dataItem);
+            console.log(column.expandedRows);
+            return {
+              value: value,
+              templateRef: column.expandedRows.first ? column.expandedRows.first.templateRef : null,
+              width: '100%'
+            };
+          }),
         }));
     });
   }
@@ -95,6 +106,7 @@ export class NgxLcTableComponent implements AfterViewInit {
 
 export class NgxLcTableRow {
   cells: NgxLcTableCell[];
+  expandedRows: NgxLcTableCell[];
 }
 
 export class NgxLcTableCell {

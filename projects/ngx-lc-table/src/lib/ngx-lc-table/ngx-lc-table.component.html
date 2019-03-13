@@ -15,6 +15,11 @@
         <ng-template [ngTemplateOutlet]="cell.templateRef"
                      [ngTemplateOutletContext]="{$implicit: cell.value}"></ng-template>
       </div>
+      <div *ngFor="let expandedRow of row.expandedRows; let i = index"
+           class="ngx-lc-table-row-expanded">
+        <ng-template [ngTemplateOutlet]="expandedRow.templateRef"
+                     [ngTemplateOutletContext]="{$implicit: expandedRow.value}"></ng-template>
+      </div>
     </div>
     <div class="ngx-lc-table-footer">
       <div [class]="'ngx-lc-table-cell column-' + i"
