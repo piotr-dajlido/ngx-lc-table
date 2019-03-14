@@ -1,4 +1,14 @@
-import {AfterViewInit, Component, ContentChildren, HostBinding, Input, QueryList, TemplateRef, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ContentChild,
+  ContentChildren,
+  HostBinding,
+  Input,
+  QueryList,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 import {NgxLcTableFooterDirective} from './ngx-lc-table-footer/ngx-lc-table-footer.directive';
 import {NgxLcTableColumnComponent} from './ngx-lc-table-column/ngx-lc-table-column.component';
 
@@ -13,7 +23,7 @@ export class NgxLcTableComponent implements AfterViewInit {
   ngxLcTableClass = true;
   @Input() data: any[];
   @ContentChildren(NgxLcTableColumnComponent) columnsDefinitions: QueryList<NgxLcTableColumnComponent>;
-  @ContentChildren(NgxLcTableFooterDirective) footerDefinition: QueryList<NgxLcTableFooterDirective>;
+  @ContentChild(NgxLcTableFooterDirective) footerDefinition: NgxLcTableFooterDirective;
   @ViewChild('emptyCell') emptyCellDefinition: TemplateRef<any>;
   headers: NgxLcTableHeader[] = [];
   rows: NgxLcTableRow[] = [];
@@ -26,16 +36,16 @@ export class NgxLcTableComponent implements AfterViewInit {
     setTimeout(() => {
       this.headers = this.columnsDefinitions.map(column =>
         ({
-          width: column.width,
-          templateRef: column.headers.first ? column.headers.first.templateRef : this.emptyCellDefinition,
+          style: column.style,
+          templateRef: column.header ? column.header.templateRef : this.emptyCellDefinition,
         }));
       this.footer = {
         cells:
           this.columnsDefinitions
           .map(column =>
             ({
-                width: column.width,
-                templateRef: column.footer.first ? column.footer.first.templateRef : this.emptyCellDefinition,
+                style: column.style,
+                templateRef: column.footer ? column.footer.templateRef : this.emptyCellDefinition,
                 value: []
               }
             )
@@ -50,19 +60,18 @@ export class NgxLcTableComponent implements AfterViewInit {
             (this.footer.cells[i].value as Array<any>).push(value);
             return {
               value: value,
-              templateRef: column.rows.first ? column.rows.first.templateRef : this.emptyCellDefinition,
-              width: column.width
+              templateRef: column.row ? column.row.templateRef : this.emptyCellDefinition,
+              style: column.style,
             };
           }),
           expandedRows: this.columnsDefinitions
           .filter(column => column.expandedRows.length !== 0)
           .map(column => {
             const value = this.resolveRequestedProperties(column.prop, dataItem);
-            console.log(column.expandedRows);
             return {
               value: value,
               templateRef: column.expandedRows.first ? column.expandedRows.first.templateRef : null,
-              width: '100%'
+              style: {minWidth: '100%'}
             };
           }),
         }));
@@ -111,7 +120,7 @@ export class NgxLcTableRow {
 
 export class NgxLcTableCell {
   value: any;
-  width: string;
+  style: any;
   templateRef: TemplateRef<any>;
 }
 
@@ -120,6 +129,6 @@ export class NgxLcTableFooter {
 }
 
 export class NgxLcTableHeader {
-  width: string;
+  style: any;
   templateRef: TemplateRef<any>;
 }
