@@ -16,7 +16,8 @@
                      [ngTemplateOutletContext]="{$implicit: cell.value}"></ng-template>
       </div>
       <div *ngFor="let expandedRow of row.expandedRows; let i = index"
-           class="ngx-lc-table-row-expanded">
+           class="ngx-lc-table-row-expanded"
+           [ngStyle]="expandedRow.style">
         <ng-template [ngTemplateOutlet]="expandedRow.templateRef"
                      [ngTemplateOutletContext]="{$implicit: expandedRow.value}"></ng-template>
       </div>
@@ -31,8 +32,8 @@
     </div>
   </div>
   <div class="ngx-lc-table-footer-container">
-    <div class="ngx-lc-table-footer">
-      <ng-template [ngTemplateOutlet]="footerDefinition.templateRef"
+    <div class="ngx-lc-table-footer" [ngStyle]="footerDefinition.first.style">
+      <ng-template [ngTemplateOutlet]="footerDefinition.first.templateRef"
                    [ngTemplateOutletContext]="{$implicit: data}"></ng-template>
     </div>
   </div>

@@ -1,14 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ContentChild,
-  ContentChildren,
-  HostBinding,
-  Input,
-  QueryList,
-  TemplateRef,
-  ViewChild
-} from '@angular/core';
+import {AfterViewInit, Component, ContentChildren, HostBinding, Input, QueryList, TemplateRef, ViewChild} from '@angular/core';
 import {NgxLcTableFooterDirective} from './ngx-lc-table-footer/ngx-lc-table-footer.directive';
 import {NgxLcTableColumnComponent} from './ngx-lc-table-column/ngx-lc-table-column.component';
 
@@ -23,7 +13,7 @@ export class NgxLcTableComponent implements AfterViewInit {
   ngxLcTableClass = true;
   @Input() data: any[];
   @ContentChildren(NgxLcTableColumnComponent) columnsDefinitions: QueryList<NgxLcTableColumnComponent>;
-  @ContentChild(NgxLcTableFooterDirective) footerDefinition: NgxLcTableFooterDirective;
+  @ContentChildren(NgxLcTableFooterDirective, {descendants: false}) footerDefinition: QueryList<NgxLcTableFooterDirective>;
   @ViewChild('emptyCell') emptyCellDefinition: TemplateRef<any>;
   headers: NgxLcTableHeader[] = [];
   rows: NgxLcTableRow[] = [];
@@ -44,7 +34,7 @@ export class NgxLcTableComponent implements AfterViewInit {
           this.columnsDefinitions
           .map(column =>
             ({
-                style: column.style,
+                style: Object.assign(column.footer ? column.footer.style : {}, {minWidth: column.style.minWidth}),
                 templateRef: column.footer ? column.footer.templateRef : this.emptyCellDefinition,
                 value: []
               }
@@ -71,7 +61,7 @@ export class NgxLcTableComponent implements AfterViewInit {
             return {
               value: value,
               templateRef: column.expandedRows.first ? column.expandedRows.first.templateRef : null,
-              style: {minWidth: '100%'}
+              style: column.expandedRows.first.style
             };
           }),
         }));

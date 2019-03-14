@@ -1,5 +1,5 @@
-import {Directive, Host} from '@angular/core';
-import {NgxLcTableColumnComponent} from '../ngx-lc-table-column/ngx-lc-table-column.component';
+import {Directive, Inject, Optional} from '@angular/core';
+import {NGX_LC_ALIGNABLE_COMPONENT, NgxLcAlignable} from './ngx-lc-alignable';
 
 @Directive({
   selector: '[ngxLcAlignLeft]'
@@ -10,7 +10,9 @@ export class NgxLcAlignLeftDirective {
     'justifyContent': 'flex-start'
   };
 
-  constructor(@Host() private ngxLcTableColumn: NgxLcTableColumnComponent) {
-    Object.assign(this.ngxLcTableColumn.style, this.style);
+  constructor(@Optional() @Inject(NGX_LC_ALIGNABLE_COMPONENT) private ngxLcAlignable: NgxLcAlignable) {
+    if (ngxLcAlignable) {
+      Object.assign(this.ngxLcAlignable.style, this.style);
+    }
   }
 }
