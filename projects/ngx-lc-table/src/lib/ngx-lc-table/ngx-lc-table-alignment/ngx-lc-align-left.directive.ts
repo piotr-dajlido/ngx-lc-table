@@ -7,7 +7,8 @@ import {NGX_LC_ALIGNABLE_COMPONENT, NgxLcAlignable} from './ngx-lc-alignable';
 export class NgxLcAlignLeftDirective {
 
   style = {
-    'justifyContent': 'flex-start'
+    'justifyContent': 'flex-start',
+    'text-align': 'left'
   };
 
   constructor(@Optional() @Inject(NGX_LC_ALIGNABLE_COMPONENT) private ngxLcAlignable: NgxLcAlignable) {

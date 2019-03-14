@@ -7,7 +7,8 @@ import {NGX_LC_ALIGNABLE_COMPONENT, NgxLcAlignable} from './ngx-lc-alignable';
 export class NgxLcAlignCenterDirective {
 
   style = {
-    'justifyContent': 'center'
+    'justifyContent': 'center',
+    'text-align': 'center'
   };
 
   constructor(@Optional() @Inject(NGX_LC_ALIGNABLE_COMPONENT) private ngxLcAlignable: NgxLcAlignable) {
