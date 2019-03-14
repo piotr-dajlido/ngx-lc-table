@@ -1,6 +1,5 @@
 .ngx-lc-table-container {
   display: flex;
-  width: 100%;
   max-width: 100%;
   flex: 1;
   flex-direction: column;
@@ -8,7 +7,6 @@
     display: flex;
     width: 100%;
   }
-
   .ngx-lc-table-row-container {
     display: flex;
     flex-direction: column;
