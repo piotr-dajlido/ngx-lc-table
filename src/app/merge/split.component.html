@@ -1,0 +1,15 @@
+<ngx-lc-table [data]="data">
+  <ngx-lc-table-column [prop]="'color'">
+    <ng-template ngxLcTableRow let-value>{{value}}</ng-template>
+  </ngx-lc-table-column>
+  <ngx-lc-table-column [prop]="'category'">
+    <ng-template ngxLcTableRow let-value>{{value}}</ng-template>
+  </ngx-lc-table-column>
+  <ngx-lc-table-column [prop]="'type'">
+    <ng-template ngxLcTableRow let-value>{{value}}</ng-template>
+  </ngx-lc-table-column>
+  <ngx-lc-table-column [prop]="'code'">
+    <ng-template ngxLcTableRow let-value>{{value.rgba}}</ng-template>
+    <ng-template ngxLcTableRow let-value>{{value.hex}}</ng-template>
+  </ngx-lc-table-column>
+</ngx-lc-table>

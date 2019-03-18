@@ -6,12 +6,14 @@ import {SandboxComponent} from './sandbox/sandbox.component';
 import {AppRoutingModule} from './app-routing.module';
 import {NgxLcTableModule} from '../../projects/ngx-lc-table/src/lib/ngx-lc-table.module';
 import { MinimalComponent } from './minimal/minimal.component';
+import { SplitComponent } from './merge/split.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SandboxComponent,
-    MinimalComponent
+    MinimalComponent,
+    SplitComponent
   ],
   imports: [
     NgxLcTableModule,
