@@ -24,32 +24,28 @@ export class NgxLcTableComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.headers = this.columnsDefinitions.map(column =>
+      this.headers = this.columnsDefinitions.filter(column => !!column.header).map(column =>
         ({
           style: column.header ? column.header.style ? column.header.style : column.style : column.style,
           templateRef: column.header ? column.header.templateRef : this.emptyCellDefinition,
         }));
 
       this.footer = {
-        cells:
-          this.columnsDefinitions
-          .map(column =>
-            ({
-                style: Object.assign(column.footer ? column.footer.style : {}, {minWidth: column.style ? column.style.minWidth : 'unset'}),
-                templateRef: column.footer ? column.footer.templateRef : this.emptyCellDefinition,
-                value: []
-              }
-            )
-          )
+        cells: this.columnsDefinitions.map(column =>
+          ({
+            style: Object.assign(column.footer ? column.footer.style : {}, {minWidth: column.style ? column.style.minWidth : 'unset'}),
+            templateRef: column.footer ? column.footer.templateRef : this.emptyCellDefinition,
+            value: []
+          }))
       };
 
-      this.rows = this.data
-      .map(dataItem =>
+      this.rows = this.data.map(dataItem =>
         ({
-          content: this.columnsDefinitions
-          .map((column, i) => {
+          content: this.columnsDefinitions.map((column, i) => {
             const value = this.resolveRequestedProperties(column.prop, dataItem);
+
             (this.footer.cells[i].value as Array<any>).push(value);
+
             return {
               cells: column.rows.map(cell => {
                 return {
@@ -60,9 +56,7 @@ export class NgxLcTableComponent implements AfterViewInit {
               })
             };
           }),
-          expandedRows: this.columnsDefinitions
-          .filter(column => column.expandedRows.length !== 0)
-          .map(column => {
+          expandedRows: this.columnsDefinitions.filter(column => !!column.expandedRows.length).map(column => {
             const value = this.resolveRequestedProperties(column.prop, dataItem);
             return {
               value: value,
