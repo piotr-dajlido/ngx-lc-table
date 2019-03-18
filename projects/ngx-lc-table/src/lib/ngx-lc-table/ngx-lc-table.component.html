@@ -10,30 +10,30 @@
   <div class="ngx-lc-table-row-container">
     <div class="ngx-lc-table-row" *ngFor="let row of rows">
       <div [class]="'ngx-lc-table-cell column-' + i"
-           [ngStyle]="cell.style"
+           [ngStyle]="cell?.style"
            *ngFor="let cell of row.cells; let i = index">
-        <ng-template [ngTemplateOutlet]="cell.templateRef"
+        <ng-template [ngTemplateOutlet]="cell?.templateRef"
                      [ngTemplateOutletContext]="{$implicit: cell.value}"></ng-template>
       </div>
       <div *ngFor="let expandedRow of row.expandedRows; let i = index"
            class="ngx-lc-table-row-expanded"
-           [ngStyle]="expandedRow.style">
-        <ng-template [ngTemplateOutlet]="expandedRow.templateRef"
+           [ngStyle]="expandedRow?.style">
+        <ng-template [ngTemplateOutlet]="expandedRow?.templateRef"
                      [ngTemplateOutletContext]="{$implicit: expandedRow.value}"></ng-template>
       </div>
     </div>
     <div class="ngx-lc-table-footer">
       <div [class]="'ngx-lc-table-cell column-' + i"
            *ngFor="let footerCell of footer.cells; let i = index"
-           [ngStyle]="footerCell.style">
+           [ngStyle]="footerCell?.style">
         <ng-template [ngTemplateOutlet]="footerCell.templateRef"
-                     [ngTemplateOutletContext]="{$implicit: footerCell.value}"></ng-template>
+                     [ngTemplateOutletContext]="{$implicit: footerCell?.value}"></ng-template>
       </div>
     </div>
   </div>
   <div class="ngx-lc-table-footer-container">
-    <div class="ngx-lc-table-footer" [ngStyle]="footerDefinition.first.style">
-      <ng-template [ngTemplateOutlet]="footerDefinition.first.templateRef"
+    <div class="ngx-lc-table-footer" [ngStyle]="footerDefinition?.first?.style">
+      <ng-template [ngTemplateOutlet]="footerDefinition?.first?.templateRef"
                    [ngTemplateOutletContext]="{$implicit: data}"></ng-template>
     </div>
   </div>

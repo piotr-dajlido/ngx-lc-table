@@ -41,6 +41,7 @@ export class NgxLcTableComponent implements AfterViewInit {
             )
           )
       };
+      console.log(this.footer);
       this.rows = this.data
       .map(dataItem =>
         ({
