@@ -17,26 +17,36 @@ export class NgxLcTableComponent implements AfterViewInit {
   @ViewChild('emptyCell') emptyCellDefinition: TemplateRef<any>;
   headers: NgxLcTableHeader[] = [];
   rows: NgxLcTableRow[] = [];
-  footer: NgxLcTableFooter = new NgxLcTableFooter();
+  footers: NgxLcTableFooter = new NgxLcTableFooter();
+  hasHeaders = false;
+  hasFooters = false;
 
   constructor() {
   }
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.headers = this.columnsDefinitions.filter(column => !!column.header).map(column =>
-        ({
+      this.headers = this.columnsDefinitions.map(column => {
+        if (!this.hasHeaders && column.header) {
+          this.hasHeaders = true;
+        }
+        return {
           style: column.header ? column.header.style ? column.header.style : column.style : column.style,
           templateRef: column.header ? column.header.templateRef : this.emptyCellDefinition,
-        }));
+        };
+      });
 
-      this.footer = {
-        cells: this.columnsDefinitions.map(column =>
-          ({
-            style: Object.assign(column.footer ? column.footer.style : {}, {minWidth: column.style ? column.style.minWidth : 'unset'}),
+      this.footers = {
+        cells: this.columnsDefinitions.map(column => {
+          if (!this.hasFooters && column.footer) {
+            this.hasFooters = true;
+          }
+          return {
+            style: Object.assign(column.footer && column.footer.style ? column.footer.style : {}, {minWidth: column.style ? column.style.minWidth : 'unset'}),
             templateRef: column.footer ? column.footer.templateRef : this.emptyCellDefinition,
             value: []
-          }))
+          };
+        })
       };
 
       this.rows = this.data.map(dataItem =>
@@ -44,7 +54,7 @@ export class NgxLcTableComponent implements AfterViewInit {
           content: this.columnsDefinitions.map((column, i) => {
             const value = this.resolveRequestedProperties(column.prop, dataItem);
 
-            (this.footer.cells[i].value as Array<any>).push(value);
+            (this.footers.cells[i].value as Array<any>).push(value);
 
             return {
               cells: column.rows.map(cell => {
