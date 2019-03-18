@@ -1,21 +1,20 @@
 <ngx-lc-table [data]="tableData">
-  <ngx-lc-table-column [prop]="'name'" ngxLcAlignRight>
-    <ng-template ngxLcTableHeader>Name</ng-template>
+  <ngx-lc-table-column [prop]="'name'" ngxLcAlignCenter>
+    <ng-template ngxLcTableHeader ngxLcAlignLeft>Name</ng-template>
     <ng-template ngxLcTableRow let-value>{{value}}</ng-template>
+    <ng-template ngxLcTableRow ngxLcAlignRight let-value>{{value}}</ng-template>
   </ngx-lc-table-column>
-  <ngx-lc-table-column [prop]="'lastName'" width="250px">
+  <ngx-lc-table-column [prop]="'lastName'">
     <ng-template ngxLcTableHeader>Last Name</ng-template>
     <ng-template ngxLcTableRow let-value>{{value}}</ng-template>
   </ngx-lc-table-column>
   <ngx-lc-table-column [prop]="['age', 'sex']">
     <ng-template ngxLcTableHeader>Age</ng-template>
     <ng-template ngxLcTableRow let-value>{{value.age}}-{{value.sex}}</ng-template>
-    <ng-template ngxLcTableFooter let-value ngxLcAlignCenter>{{acc(value)}}</ng-template>
   </ngx-lc-table-column>
   <ngx-lc-table-column [prop]="'misc.phone'">
     <ng-template ngxLcTableHeader><div (click)="click()">Phone</div></ng-template>
     <ng-template ngxLcTableRow let-value>{{value}}</ng-template>
-    <ng-template ngxLcTableRowExpanded let-value ngxLcAlignCenter><div>{{value}}</div></ng-template>
   </ngx-lc-table-column>
   <ngx-lc-table-column [prop]="['misc.bloodType','misc.eyeColor']" ngxLcAlignRight>
     <ng-template ngxLcTableHeader>
@@ -24,7 +23,4 @@
     <ng-template ngxLcTableRow let-value>{{value.misc.bloodType}} | {{value.misc.eyeColor}}
     </ng-template>
   </ngx-lc-table-column>
-  <ng-template ngxLcTableFooter ngxLcAlignRight>
-    Hello
-  </ng-template>
 </ngx-lc-table>

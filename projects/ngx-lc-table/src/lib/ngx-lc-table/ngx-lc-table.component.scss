@@ -15,6 +15,14 @@
       display: flex;
       width: 100%;
       flex-wrap: wrap;
+      .ngx-lc-table-cell-container {
+        display: flex;
+        flex: 1;
+        .ngc-lc-table-cell {
+          display: flex;
+          flex: 1;
+        }
+      }
     }
   }
 }

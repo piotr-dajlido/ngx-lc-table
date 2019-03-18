@@ -1,4 +1,4 @@
-import {Directive, Inject, Optional} from '@angular/core';
+import {Directive, Inject, Optional, Self} from '@angular/core';
 import {NGX_LC_ALIGNABLE_COMPONENT, NgxLcAlignable} from './ngx-lc-alignable';
 
 @Directive({
@@ -11,8 +11,9 @@ export class NgxLcAlignCenterDirective {
     'text-align': 'center'
   };
 
-  constructor(@Optional() @Inject(NGX_LC_ALIGNABLE_COMPONENT) private ngxLcAlignable: NgxLcAlignable) {
+  constructor(@Optional() @Self() @Inject(NGX_LC_ALIGNABLE_COMPONENT) private ngxLcAlignable: NgxLcAlignable) {
     if (ngxLcAlignable) {
+      this.ngxLcAlignable.style = {};
       Object.assign(this.ngxLcAlignable.style, this.style);
     }
   }

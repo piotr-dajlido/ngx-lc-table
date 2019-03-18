@@ -16,11 +16,12 @@ export class NgxLcTableColumnComponent extends NgxLcAlignable {
   @Input() prop: string | string[];
 
   @Input() set width(value: string) {
+    this.style = this.style || {};
     this.style['minWidth'] = value;
   }
 
   @ContentChild(NgxLcTableHeaderDirective) header: NgxLcTableHeaderDirective;
-  @ContentChild(NgxLcTableRowDirective) row: NgxLcTableRowDirective;
+  @ContentChildren(NgxLcTableRowDirective) rows: QueryList<NgxLcTableRowDirective>;
   @ContentChildren(NgxLcTableRowExpandedDirective) expandedRows: QueryList<NgxLcTableRowExpandedDirective>;
   @ContentChild(NgxLcTableFooterDirective) footer: NgxLcTableFooterDirective;
 

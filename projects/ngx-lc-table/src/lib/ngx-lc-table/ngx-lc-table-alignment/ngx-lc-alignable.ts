@@ -1,7 +1,7 @@
 import {InjectionToken} from '@angular/core';
 
 export class NgxLcAlignable {
-  style: any = {};
+  style: any = null;
 }
 
 export const NGX_LC_ALIGNABLE_COMPONENT =

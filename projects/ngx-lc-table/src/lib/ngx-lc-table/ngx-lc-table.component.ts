@@ -26,33 +26,38 @@ export class NgxLcTableComponent implements AfterViewInit {
     setTimeout(() => {
       this.headers = this.columnsDefinitions.map(column =>
         ({
-          style: column.style,
+          style: column.header ? column.header.style ? column.header.style : column.style : column.style,
           templateRef: column.header ? column.header.templateRef : this.emptyCellDefinition,
         }));
+
       this.footer = {
         cells:
           this.columnsDefinitions
           .map(column =>
             ({
-                style: Object.assign(column.footer ? column.footer.style : {}, {minWidth: column.style.minWidth}),
+                style: Object.assign(column.footer ? column.footer.style : {}, {minWidth: column.style ? column.style.minWidth : 'unset'}),
                 templateRef: column.footer ? column.footer.templateRef : this.emptyCellDefinition,
                 value: []
               }
             )
           )
       };
-      console.log(this.footer);
+
       this.rows = this.data
       .map(dataItem =>
         ({
-          cells: this.columnsDefinitions
+          content: this.columnsDefinitions
           .map((column, i) => {
             const value = this.resolveRequestedProperties(column.prop, dataItem);
             (this.footer.cells[i].value as Array<any>).push(value);
             return {
-              value: value,
-              templateRef: column.row ? column.row.templateRef : this.emptyCellDefinition,
-              style: column.style,
+              cells: column.rows.map(cell => {
+                return {
+                  value: value,
+                  templateRef: cell ? cell.templateRef : this.emptyCellDefinition,
+                  style: cell.style ? cell.style : column.style
+                };
+              })
             };
           }),
           expandedRows: this.columnsDefinitions
@@ -105,8 +110,12 @@ export class NgxLcTableComponent implements AfterViewInit {
 }
 
 export class NgxLcTableRow {
-  cells: NgxLcTableCell[];
+  content: NgxLcTableRowContent[];
   expandedRows: NgxLcTableCell[];
+}
+
+export class NgxLcTableRowContent {
+  cells: NgxLcTableCell[];
 }
 
 export class NgxLcTableCell {
