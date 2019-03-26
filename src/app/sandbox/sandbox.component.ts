@@ -67,6 +67,9 @@ export class SandboxComponent implements OnInit {
   }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.tableData = this.tableData.splice(4, 2);
+    }, 1000);
   }
 
   click() {
