@@ -67,11 +67,12 @@ export class NgxLcTableComponent implements AfterViewInit {
               (this.footers.cells[i].value as Array<any>).push(value);
 
               return {
+                style: column.style,
                 cells: column.rows.map(cell => {
                   return {
                     value: value,
                     templateRef: cell ? cell.templateRef : this.emptyCellDefinition,
-                    style: cell.style ? cell.style : column.style
+                    style: cell.style ? this.excludePropertiesFromStyle(['minWidth', 'maxWidth'], cell.style) : {}
                   };
                 })
               };
@@ -93,7 +94,7 @@ export class NgxLcTableComponent implements AfterViewInit {
   resolveRequestedProperties(prop: string | string[], dataItem: any) {
     if (prop instanceof Array) {
       const resolvedPropValues = {};
-      (<Array<string>> prop).forEach((_prop) => {
+      (<Array<string>>prop).forEach((_prop) => {
         this.buildObjectFromDescendantPath(
           _prop.split('.'),
           resolvedPropValues,
@@ -123,6 +124,15 @@ export class NgxLcTableComponent implements AfterViewInit {
     return obj;
   }
 
+  excludePropertiesFromStyle(properites: string[], obj) {
+    for (const propName in properites) {
+      if (obj[propName] !== null && obj[propName] !== undefined) {
+        delete obj[propName];
+      }
+    }
+  }
+
+
 }
 
 export class NgxLcTableRow {
@@ -131,6 +141,7 @@ export class NgxLcTableRow {
 }
 
 export class NgxLcTableRowContent {
+  style: any;
   cells: NgxLcTableCell[];
 }
 

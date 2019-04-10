@@ -10,6 +10,7 @@
   <div class="ngx-lc-table-row-container">
     <div class="ngx-lc-table-row" *ngFor="let row of rows">
       <div [class]="'ngx-lc-table-cell-container column-' + i"
+           [ngStyle]="content.style"
            *ngFor="let content of row.content; let i = index">
         <div class="ngx-lc-table-cell"
              [ngStyle]="cell.style"

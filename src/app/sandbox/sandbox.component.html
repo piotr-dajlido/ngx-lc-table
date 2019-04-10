@@ -1,5 +1,5 @@
 <ngx-lc-table [data]="tableData">
-  <ngx-lc-table-column [prop]="'name'" ngxLcAlignCenter>
+  <ngx-lc-table-column [width]="'50px'" [prop]="'name'" ngxLcAlignCenter>
     <ng-template ngxLcTableRow let-value>{{value}}</ng-template>
     <ng-template ngxLcTableRow ngxLcAlignRight let-value>{{value}}</ng-template>
   </ngx-lc-table-column>
@@ -8,7 +8,7 @@
     <ng-template ngxLcTableRow let-value>{{value}}</ng-template>
     <ng-template ngxLcTableFooter let-value>{{value}}werwer</ng-template>
   </ngx-lc-table-column>
-  <ngx-lc-table-column [prop]="['age', 'sex']">
+  <ngx-lc-table-column [width]="'40px'" [prop]="['age', 'sex']">
     <ng-template ngxLcTableHeader>Age</ng-template>
     <ng-template ngxLcTableRow let-value>{{value.age}}-{{value.sex}}</ng-template>
   </ngx-lc-table-column>

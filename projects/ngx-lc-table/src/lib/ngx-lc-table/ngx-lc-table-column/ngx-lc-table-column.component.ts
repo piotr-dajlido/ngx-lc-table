@@ -18,6 +18,7 @@ export class NgxLcTableColumnComponent extends NgxLcAlignable {
   @Input() set width(value: string) {
     this.style = this.style || {};
     this.style['minWidth'] = value;
+    this.style['maxWidth'] = value;
   }
 
   @ContentChild(NgxLcTableHeaderDirective) header: NgxLcTableHeaderDirective;
