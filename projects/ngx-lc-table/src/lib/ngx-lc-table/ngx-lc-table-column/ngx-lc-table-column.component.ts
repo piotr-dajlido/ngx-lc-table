@@ -3,15 +3,15 @@ import {NgxLcTableHeaderDirective} from '../ngx-lc-table-header/ngx-lc-table-hea
 import {NgxLcTableRowDirective} from '../ngx-lc-table-row/ngx-lc-table-row.directive';
 import {NgxLcTableFooterDirective} from '../ngx-lc-table-footer/ngx-lc-table-footer.directive';
 import {NgxLcTableRowExpandedDirective} from '../ngx-lc-table-row/ngx-lc-table-row-expanded.directive';
-import {NGX_LC_ALIGNABLE_COMPONENT, NgxLcAlignable} from '../ngx-lc-table-alignment/ngx-lc-alignable';
+import {NGX_LC_COMPONENT_WITH_STYLE, NgxLcWithStyle} from '../ngx-lc-table-style/ngx-lc-with-style';
 
 @Component({
   selector: 'ngx-lc-table-column',
   templateUrl: './ngx-lc-table-column.component.html',
   styleUrls: ['./ngx-lc-table-column.component.css'],
-  providers: [{provide: NGX_LC_ALIGNABLE_COMPONENT, useExisting: forwardRef(() => NgxLcTableColumnComponent)}]
+  providers: [{provide: NGX_LC_COMPONENT_WITH_STYLE, useExisting: forwardRef(() => NgxLcTableColumnComponent)}]
 })
-export class NgxLcTableColumnComponent extends NgxLcAlignable {
+export class NgxLcTableColumnComponent extends NgxLcWithStyle {
 
   @Input() prop: string | string[];
 

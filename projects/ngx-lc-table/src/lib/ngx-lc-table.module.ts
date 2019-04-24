@@ -6,9 +6,9 @@ import {NgxLcTableHeaderDirective} from './ngx-lc-table/ngx-lc-table-header/ngx-
 import {NgxLcTableRowDirective} from './ngx-lc-table/ngx-lc-table-row/ngx-lc-table-row.directive';
 import {CommonModule} from '@angular/common';
 import {NgxLcTableRowExpandedDirective} from './ngx-lc-table/ngx-lc-table-row/ngx-lc-table-row-expanded.directive';
-import {NgxLcAlignLeftDirective} from './ngx-lc-table/ngx-lc-table-alignment/ngx-lc-align-left.directive';
-import {NgxLcAlignCenterDirective} from './ngx-lc-table/ngx-lc-table-alignment/ngx-lc-align-center.directive';
-import {NgxLcAlignRightDirective} from './ngx-lc-table/ngx-lc-table-alignment/ngx-lc-align-right.directive';
+import {NgxLcAlignLeftDirective} from './ngx-lc-table/ngx-lc-table-style/ngx-lc-table-alignment/ngx-lc-align-left.directive';
+import {NgxLcAlignCenterDirective} from './ngx-lc-table/ngx-lc-table-style/ngx-lc-table-alignment/ngx-lc-align-center.directive';
+import {NgxLcAlignRightDirective} from './ngx-lc-table/ngx-lc-table-style/ngx-lc-table-alignment/ngx-lc-align-right.directive';
 
 @NgModule({
   imports: [CommonModule],
