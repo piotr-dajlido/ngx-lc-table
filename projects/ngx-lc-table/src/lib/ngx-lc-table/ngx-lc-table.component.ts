@@ -1,4 +1,15 @@
-import {AfterViewInit, Component, ContentChildren, HostBinding, Input, QueryList, TemplateRef, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ContentChildren,
+  EventEmitter,
+  HostBinding,
+  Input,
+  Output,
+  QueryList,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 import {NgxLcTableFooterDirective} from './ngx-lc-table-footer/ngx-lc-table-footer.directive';
 import {NgxLcTableColumnComponent} from './ngx-lc-table-column/ngx-lc-table-column.component';
 
@@ -18,7 +29,7 @@ export class NgxLcTableComponent implements AfterViewInit {
       this.buildTable();
     }
   }
-
+  @Output('onRowClick') onRowClick: EventEmitter<any> = new EventEmitter();
   @ContentChildren(NgxLcTableColumnComponent) columnsDefinitions: QueryList<NgxLcTableColumnComponent>;
   @ContentChildren(NgxLcTableFooterDirective, {descendants: false}) footerDefinition: QueryList<NgxLcTableFooterDirective>;
   @ViewChild('emptyCell') emptyCellDefinition: TemplateRef<any>;
@@ -61,6 +72,7 @@ export class NgxLcTableComponent implements AfterViewInit {
 
         this.rows = this._data.map(dataItem =>
           ({
+            rawData: dataItem,
             content: this.columnsDefinitions.map((column, i) => {
               const value = this.resolveRequestedProperties(column.prop, dataItem);
 
@@ -139,6 +151,7 @@ export class NgxLcTableComponent implements AfterViewInit {
 }
 
 export class NgxLcTableRow {
+  rawData: any;
   content: NgxLcTableRowContent[];
   expandedRows: NgxLcTableCell[];
 }

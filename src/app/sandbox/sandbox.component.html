@@ -1,4 +1,4 @@
-<ngx-lc-table [data]="tableData">
+<ngx-lc-table [data]="tableData" (onRowClick)="logRowData($event)">
   <ngx-lc-table-column [prop]="'name'">
     <ng-template ngxLcTableRow let-value>{{value}}</ng-template>
     <ng-template ngxLcTableRow  let-value>{{value}}</ng-template>

@@ -73,6 +73,11 @@ export class SandboxComponent implements OnInit {
 
   }
 
+  logRowData($event: any) {
+    console.group('Event : Row Clicked');
+    console.log($event);
+    console.groupEnd();
+  }
 }
 
 export class Person {
